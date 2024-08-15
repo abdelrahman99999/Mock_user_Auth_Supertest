@@ -21,9 +21,9 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
@@ -31,9 +31,11 @@ jobs:
     - name: Installation of related packages
       run: |
             cd mock_user_authentication_API
+            npm i --save mock-user-auth
             npm ci
             cd ..
             cd Testing_supertest
+            npm i --save supertest mocha chai@4.2.0
             npm ci
             cd ..
 
