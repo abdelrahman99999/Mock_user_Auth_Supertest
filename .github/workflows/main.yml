@@ -43,7 +43,7 @@ jobs:
             npm run dev 8081
   
   Test_mock_user_authentication_API_By_supertest:
-    needs: Run_mock_user_authentication_API
+    # needs: Run_mock_user_authentication_API
     runs-on: ubuntu-latest
 
     strategy:
@@ -59,7 +59,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: 'Testing_supertest/package-lock.json'
-        
+   
+    - name: Sleep for 60 seconds
+      run: sleep 60s
+      shell: bash
+    
     - name: Installation of related packages
       run: |
             cd Testing_supertest
