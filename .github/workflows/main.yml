@@ -29,7 +29,13 @@ jobs:
         cache: 'npm'
         
     - name: Installation of related packages
-      run: npm ci
+      run: |
+            cd mock_user_authentication_API
+            npm ci
+            cd ..
+            cd Testing_supertest
+            npm ci
+            cd ..
 
     - name: RUN mock-user-auth
       run: |
