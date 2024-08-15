@@ -11,7 +11,7 @@ on:
     
 
 jobs:
-  RUN-SuperTest-API-Test:
+  Run_mock_user_authentication_API:
 
     runs-on: ubuntu-latest
 
@@ -27,6 +27,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: 'mock_user_authentication_API/package-lock.json'
         
     - name: Installation of related packages
       run: |
@@ -34,21 +35,45 @@ jobs:
             npm i --save mock-user-auth
             npm ci
             cd ..
-            cd Testing_supertest
-            npm i --save supertest mocha chai@4.2.0
-            npm ci
-            cd ..
+            
 
     - name: RUN mock-user-auth
       run: |
             cd mock_user_authentication_API
             npm run dev 8081
-      
+  
+  Test_mock_user_authentication_API_By_supertest:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: 'Testing_supertest/package-lock.json'
+        
+    - name: Installation of related packages
+      run: |
+            cd Testing_supertest
+            npm i --save supertest mocha chai@4.2.0 mochawesome
+            npm ci
+            cd ..
+            
+
     - name: RUN SuperTest API Testing
       run: |
-            cd ..
             cd Testing_supertest
             npm run test
+      
+
       
     # - name: Archive SuperTest mochawesome test report
     #   uses: actions/upload-artifact@v3
