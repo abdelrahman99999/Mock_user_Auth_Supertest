@@ -19,9 +19,9 @@ Test all the API routes found on the  mock-user-auth - npm (npmjs.com) by supert
 ```
 ## Screenshots
 ### Running & Testing
-![](screenshots\run_test.png)
+![tap](screenshots/run_test.png)
 ### Report
-![](screenshots\report.png)
+![tap](screenshots/report.png)
 
 ## Related Info
 Link for mock-user-auth : https://www.npmjs.com/package/mock-user-auth 
